@@ -1,0 +1,83 @@
+name: Publish to Packagist
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, dom, filter, gd, iconv, json, mbstring, pdo, session, tokenizer, xml, zip, curl, fileinfo, openssl
+          coverage: xdebug
+          
+      - name: Install Composer
+        uses: ramsey/composer-install@v4
+        with:
+          composer-options: --no-dev --optimize-autoloader
+          
+      - name: Validate composer.json
+        run: composer validate --strict
+        
+      - name: Run tests
+        run: |
+          composer install --dev
+          vendor/bin/phpunit --coverage-text
+          
+      - name: Build package
+        run: composer archive --format=zip --dir=dist
+          
+      - name: Publish to Packagist
+        run: |
+          composer config http-basic.repo.packagist.com ${{ secrets.PACKAGIST_USERNAME }} ${{ secrets.PACKAGIST_TOKEN }}
+          composer config repositories.packagist composer https://repo.packagist.com
+          composer publish --no-interaction
+          
+      - name: Verify Packagist availability
+        run: |
+          echo "Waiting for Packagist to update..."
+          sleep 60
+          
+          # Test if the package is available on Packagist
+          PACKAGE_VERSION="${{ github.event.release.tag_name }}"
+          PACKAGE_NAME="yowedjamal/bjpass-backend-sdk"
+          
+          # Try to install the package to verify it's available
+          composer create-project --no-interaction --prefer-dist "$PACKAGE_NAME:$PACKAGE_VERSION" test-install
+          
+          if [ -d "test-install" ]; then
+            echo "✅ Package successfully published and available on Packagist!"
+            rm -rf test-install
+          else
+            echo "❌ Package not yet available on Packagist"
+            exit 1
+          fi
+          
+      - name: Create Packagist badge
+        run: |
+          echo "## 📦 Distribution" >> $GITHUB_WORKSPACE/DISTRIBUTION.md
+          echo "" >> $GITHUB_WORKSPACE/DISTRIBUTION.md
+          echo "### Packagist" >> $GITHUB_WORKSPACE/DISTRIBUTION.md
+          echo "" >> $GITHUB_WORKSPACE/DISTRIBUTION.md
+          echo "**Latest version:**" >> $GITHUB_WORKSPACE/DISTRIBUTION.md
+          echo "\`\`\`bash" >> $GITHUB_WORKSPACE/DISTRIBUTION.md
+          echo "composer require yowedjamal/bjpass-backend-sdk:${{ github.event.release.tag_name }}" >> $GITHUB_WORKSPACE/DISTRIBUTION.md
+          echo "\`\`\`" >> $GITHUB_WORKSPACE/DISTRIBUTION.md
+          echo "" >> $GITHUB_WORKSPACE/DISTRIBUTION.md
+          echo "**Stats:** [https://packagist.org/packages/yowedjamal/bjpass-backend-sdk](https://packagist.org/packages/yowedjamal/bjpass-backend-sdk)" >> $GITHUB_WORKSPACE/DISTRIBUTION.md
+          
+      - name: Commit distribution info
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add DISTRIBUTION.md
+          git commit -m "Update distribution info for ${{ github.event.release.tag_name }}" || echo "No changes to commit"
+          git push || echo "No changes to push"

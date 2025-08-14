@@ -1,0 +1,20 @@
+{
+  "name": "bjpass-backend-sdk-docs",
+  "version": "1.0.0",
+  "description": "Documentation for BjPass Backend SDK",
+  "scripts": {
+    "build": "honkit build . ../_book",
+    "serve": "honkit serve . ../_book",
+    "install-honkit": "npm install -g honkit"
+  },
+  "devDependencies": {
+    "honkit": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "gitbook-plugin-copy-code-button": "^0.0.2",
+    "gitbook-plugin-search": "^2.2.1"
+  }
+}

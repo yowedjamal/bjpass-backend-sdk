@@ -1,0 +1,561 @@
+
+<!DOCTYPE HTML>
+<html lang="fr" >
+    <head>
+        <meta charset="UTF-8">
+        <title>Sécurité · BjPass Backend SDK Documentation</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 6.0.3">
+        <meta name="author" content="Yowe Djamal">
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/@honkit/honkit-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/@honkit/honkit-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="frontend-integration.html" />
+    
+    
+    <link rel="prev" href="api-reference.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Tapez pour rechercher" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="installation.html">
+            
+                <a href="installation.html">
+            
+                    
+                    Installation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="configuration.html">
+            
+                <a href="configuration.html">
+            
+                    
+                    Configuration
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="usage.html">
+            
+                <a href="usage.html">
+            
+                    
+                    Utilisation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="api-reference.html">
+            
+                <a href="api-reference.html">
+            
+                    
+                    API Reference
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.6" data-path="security.html">
+            
+                <a href="security.html">
+            
+                    
+                    Sécurité
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="frontend-integration.html">
+            
+                <a href="frontend-integration.html">
+            
+                    
+                    Intégration Frontend
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="examples.html">
+            
+                <a href="examples.html">
+            
+                    
+                    Exemples
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="troubleshooting.html">
+            
+                <a href="troubleshooting.html">
+            
+                    
+                    Troubleshooting
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="changelog.html">
+            
+                <a href="changelog.html">
+            
+                    
+                    Changelog
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Publié avec HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Sécurité</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="sécurité">Sécurité</h1>
+<h2 id="vue-densemble">Vue d'ensemble</h2>
+<p>Le BjPass Backend SDK implémente plusieurs couches de sécurité pour protéger vos utilisateurs et votre application contre les attaques courantes.</p>
+<h2 id="authentification-et-autorisation">Authentification et autorisation</h2>
+<h3 id="validation-des-tokens-jwt">Validation des tokens JWT</h3>
+<h4 id="signature-numérique">Signature numérique</h4>
+<ul>
+<li><strong>Algorithme</strong> : RS256 (RSA + SHA256)</li>
+<li><strong>Validation</strong> : Via JWKS (JSON Web Key Set) du provider OIDC</li>
+<li><strong>Cache</strong> : Les clés publiques sont mises en cache pour optimiser les performances</li>
+</ul>
+<h4 id="claims-oidc">Claims OIDC</h4>
+<p>Le SDK valide automatiquement les claims suivants :</p>
+<ul>
+<li><strong><code>exp</code></strong> : Expiration du token</li>
+<li><strong><code>iat</code></strong> : Heure d'émission</li>
+<li><strong><code>iss</code></strong> : Émetteur (doit correspondre au provider configuré)</li>
+<li><strong><code>aud</code></strong> : Audience (doit correspondre au client_id)</li>
+<li><strong><code>nonce</code></strong> : Protection contre les attaques par rejeu</li>
+</ul>
+<h3 id="gestion-des-sessions">Gestion des sessions</h3>
+<h4 id="sécurité-des-cookies">Sécurité des cookies</h4>
+<pre><code class="lang-php"><span class="hljs-string">'cookies'</span> =&gt; [
+    <span class="hljs-string">'secure'</span> =&gt; <span class="hljs-literal">true</span>,        <span class="hljs-comment">// HTTPS uniquement</span>
+    <span class="hljs-string">'httponly'</span> =&gt; <span class="hljs-literal">true</span>,      <span class="hljs-comment">// Protection XSS</span>
+    <span class="hljs-string">'samesite'</span> =&gt; <span class="hljs-string">'lax'</span>,     <span class="hljs-comment">// Protection CSRF</span>
+    <span class="hljs-string">'domain'</span> =&gt; <span class="hljs-literal">null</span>,        <span class="hljs-comment">// Domaine de l'application</span>
+    <span class="hljs-string">'path'</span> =&gt; <span class="hljs-string">'/'</span>,           <span class="hljs-comment">// Chemin des cookies</span>
+],
+</code></pre>
+<h4 id="rotation-des-tokens">Rotation des tokens</h4>
+<ul>
+<li><strong>Refresh token</strong> : Rotation automatique à chaque utilisation</li>
+<li><strong>Session</strong> : Expiration configurable</li>
+<li><strong>Nettoyage</strong> : Suppression automatique des tokens expirés</li>
+</ul>
+<h2 id="protection-contre-les-attaques">Protection contre les attaques</h2>
+<h3 id="csrf-cross-site-request-forgery">CSRF (Cross-Site Request Forgery)</h3>
+<h4 id="validation-du-state">Validation du state</h4>
+<pre><code class="lang-php"><span class="hljs-comment">// Génération d'un state unique</span>
+<span class="hljs-variable">$state</span> = <span class="hljs-title class_">Str</span>::<span class="hljs-title function_ invoke__">random</span>(<span class="hljs-number">40</span>);
+<span class="hljs-title function_ invoke__">session</span>([<span class="hljs-string">'bjpass_state'</span> =&gt; <span class="hljs-variable">$state</span>]);
+
+<span class="hljs-comment">// Validation lors du callback</span>
+<span class="hljs-keyword">if</span> (<span class="hljs-variable">$request</span>-&gt;<span class="hljs-title function_ invoke__">get</span>(<span class="hljs-string">'state'</span>) !== <span class="hljs-title function_ invoke__">session</span>(<span class="hljs-string">'bjpass_state'</span>)) {
+    <span class="hljs-keyword">throw</span> <span class="hljs-title class_">AuthenticationException</span>::<span class="hljs-title function_ invoke__">invalidState</span>();
+}
+</code></pre>
+<h4 id="cookies-samesite">Cookies SameSite</h4>
+<pre><code class="lang-env">BJPASS_COOKIE_SAMESITE=lax
+</code></pre>
+<h3 id="xss-cross-site-scripting">XSS (Cross-Site Scripting)</h3>
+<h4 id="cookies-httponly">Cookies HTTPOnly</h4>
+<pre><code class="lang-env">BJPASS_COOKIE_HTTPONLY=true
+</code></pre>
+<p>Les tokens sont stockés dans des cookies HTTPOnly, empêchant l'accès via JavaScript.</p>
+<h3 id="attaques-par-rejeu">Attaques par rejeu</h3>
+<h4 id="nonce-unique">Nonce unique</h4>
+<pre><code class="lang-php"><span class="hljs-comment">// Génération d'un nonce unique</span>
+<span class="hljs-variable">$nonce</span> = <span class="hljs-title class_">Str</span>::<span class="hljs-title function_ invoke__">random</span>(<span class="hljs-number">40</span>);
+<span class="hljs-title function_ invoke__">session</span>([<span class="hljs-string">'bjpass_nonce'</span> =&gt; <span class="hljs-variable">$nonce</span>]);
+
+<span class="hljs-comment">// Validation dans l'ID token</span>
+<span class="hljs-keyword">if</span> (<span class="hljs-variable">$claims</span>[<span class="hljs-string">'nonce'</span>] !== <span class="hljs-title function_ invoke__">session</span>(<span class="hljs-string">'bjpass_nonce'</span>)) {
+    <span class="hljs-keyword">throw</span> <span class="hljs-title class_">InvalidTokenException</span>::<span class="hljs-title function_ invoke__">invalidNonce</span>();
+}
+</code></pre>
+<h4 id="expiration-des-tokens">Expiration des tokens</h4>
+<pre><code class="lang-php"><span class="hljs-comment">// Validation automatique de l'expiration</span>
+<span class="hljs-keyword">if</span> (<span class="hljs-variable language_">$this</span>-&gt;<span class="hljs-title function_ invoke__">isTokenExpired</span>(<span class="hljs-variable">$claims</span>)) {
+    <span class="hljs-keyword">throw</span> <span class="hljs-title class_">InvalidTokenException</span>::<span class="hljs-title function_ invoke__">expired</span>();
+}
+</code></pre>
+<h2 id="configuration-de-sécurité">Configuration de sécurité</h2>
+<h3 id="variables-denvironnement-critiques">Variables d'environnement critiques</h3>
+<pre><code class="lang-env"># Ne jamais exposer en production
+BJPASS_CLIENT_SECRET=your_super_secret_key
+
+# Configuration de sécurité
+BJPASS_COOKIE_SECURE=true
+BJPASS_COOKIE_HTTPONLY=true
+BJPASS_COOKIE_SAMESITE=lax
+BJPASS_SESSION_MAX_AGE=3600
+</code></pre>
+<h3 id="validation-de-la-configuration">Validation de la configuration</h3>
+<pre><code class="lang-php"><span class="hljs-comment">// Vérification automatique au démarrage</span>
+<span class="hljs-keyword">if</span> (<span class="hljs-keyword">empty</span>(<span class="hljs-title function_ invoke__">config</span>(<span class="hljs-string">'bjpass.client_secret'</span>))) {
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ConfigurationException</span>(<span class="hljs-string">'Client secret is required'</span>);
+}
+
+<span class="hljs-keyword">if</span> (!<span class="hljs-title function_ invoke__">filter_var</span>(<span class="hljs-title function_ invoke__">config</span>(<span class="hljs-string">'bjpass.redirect_uri'</span>), FILTER_VALIDATE_URL)) {
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ConfigurationException</span>(<span class="hljs-string">'Invalid redirect URI'</span>);
+}
+</code></pre>
+<h2 id="bonnes-pratiques">Bonnes pratiques</h2>
+<h3 id="en-production">En production</h3>
+<ol>
+<li><p><strong>HTTPS obligatoire</strong></p>
+<pre><code class="lang-env">BJPASS_COOKIE_SECURE=true
+</code></pre>
+</li>
+<li><p><strong>Domaine strict</strong></p>
+<pre><code class="lang-env">BJPASS_FRONTEND_ORIGIN=https://your-app.com
+BJPASS_BACKEND_ORIGIN=https://your-api.com
+</code></pre>
+</li>
+<li><p><strong>Expiration courte</strong></p>
+<pre><code class="lang-env">BJPASS_SESSION_MAX_AGE=1800  # 30 minutes
+</code></pre>
+</li>
+<li><p><strong>Logs de sécurité</strong></p>
+<pre><code class="lang-env">BJPASS_LOG_LEVEL=info
+BJPASS_DEBUG=false
+</code></pre>
+</li>
+</ol>
+<h3 id="monitoring-et-audit">Monitoring et audit</h3>
+<h4 id="logs-de-sécurité">Logs de sécurité</h4>
+<pre><code class="lang-php"><span class="hljs-comment">// Toutes les tentatives d'authentification sont loggées</span>
+<span class="hljs-title class_">Log</span>::<span class="hljs-title function_ invoke__">info</span>(<span class="hljs-string">'User authentication attempt'</span>, [
+    <span class="hljs-string">'ip'</span> =&gt; <span class="hljs-title function_ invoke__">request</span>()-&gt;<span class="hljs-title function_ invoke__">ip</span>(),
+    <span class="hljs-string">'user_agent'</span> =&gt; <span class="hljs-title function_ invoke__">request</span>()-&gt;<span class="hljs-title function_ invoke__">userAgent</span>(),
+    <span class="hljs-string">'timestamp'</span> =&gt; <span class="hljs-title function_ invoke__">now</span>(),
+]);
+</code></pre>
+<h4 id="métriques-de-sécurité">Métriques de sécurité</h4>
+<ul>
+<li>Nombre de tentatives d'authentification</li>
+<li>Taux d'échec d'authentification</li>
+<li>Tokens expirés et révoqués</li>
+<li>Tentatives d'accès non autorisées</li>
+</ul>
+<h2 id="gestion-des-erreurs-sécurisée">Gestion des erreurs sécurisée</h2>
+<h3 id="messages-derreur">Messages d'erreur</h3>
+<pre><code class="lang-php"><span class="hljs-comment">// Ne jamais exposer d'informations sensibles</span>
+<span class="hljs-keyword">try</span> {
+    <span class="hljs-variable">$result</span> = <span class="hljs-title class_">BjPass</span>::<span class="hljs-title function_ invoke__">exchangeCode</span>(<span class="hljs-variable">$code</span>, <span class="hljs-variable">$state</span>, <span class="hljs-variable">$sessionId</span>);
+} <span class="hljs-keyword">catch</span> (AuthenticationException <span class="hljs-variable">$e</span>) {
+    <span class="hljs-comment">// Message générique pour l'utilisateur</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">response</span>()-&gt;<span class="hljs-title function_ invoke__">json</span>([<span class="hljs-string">'error'</span> =&gt; <span class="hljs-string">'Authentication failed'</span>], <span class="hljs-number">400</span>);
+
+    <span class="hljs-comment">// Détails complets dans les logs</span>
+    <span class="hljs-title class_">Log</span>::<span class="hljs-title function_ invoke__">error</span>(<span class="hljs-string">'Authentication error'</span>, <span class="hljs-variable">$e</span>-&gt;<span class="hljs-title function_ invoke__">getContext</span>());
+}
+</code></pre>
+<h3 id="rate-limiting">Rate limiting</h3>
+<pre><code class="lang-php"><span class="hljs-comment">// Protection contre le brute force</span>
+<span class="hljs-title class_">RateLimiter</span>::<span class="hljs-keyword">for</span>(<span class="hljs-string">'auth'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">Request <span class="hljs-variable">$request</span></span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-title class_">Limit</span>::<span class="hljs-title function_ invoke__">perMinute</span>(<span class="hljs-number">5</span>)-&gt;<span class="hljs-title function_ invoke__">by</span>(<span class="hljs-variable">$request</span>-&gt;<span class="hljs-title function_ invoke__">ip</span>());
+});
+</code></pre>
+<h2 id="tests-de-sécurité">Tests de sécurité</h2>
+<h3 id="validation-des-tokens">Validation des tokens</h3>
+<pre><code class="lang-php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test_invalid_token_rejection</span>(<span class="hljs-params"></span>)
+</span>{
+    <span class="hljs-variable">$invalidToken</span> = <span class="hljs-string">'invalid.jwt.token'</span>;
+
+    <span class="hljs-variable language_">$this</span>-&gt;<span class="hljs-title function_ invoke__">expectException</span>(<span class="hljs-title class_">InvalidTokenException</span>::<span class="hljs-variable language_">class</span>);
+    <span class="hljs-title class_">BjPass</span>::<span class="hljs-title function_ invoke__">validateIdToken</span>(<span class="hljs-variable">$invalidToken</span>);
+}
+</code></pre>
+<h3 id="protection-csrf">Protection CSRF</h3>
+<pre><code class="lang-php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test_state_validation</span>(<span class="hljs-params"></span>)
+</span>{
+    <span class="hljs-variable">$invalidState</span> = <span class="hljs-string">'invalid_state'</span>;
+
+    <span class="hljs-variable language_">$this</span>-&gt;<span class="hljs-title function_ invoke__">expectException</span>(<span class="hljs-title class_">AuthenticationException</span>::<span class="hljs-variable language_">class</span>);
+    <span class="hljs-title class_">BjPass</span>::<span class="hljs-title function_ invoke__">exchangeCode</span>(<span class="hljs-string">'code'</span>, <span class="hljs-variable">$invalidState</span>, <span class="hljs-string">'session'</span>);
+}
+</code></pre>
+<h2 id="prochaines-étapes">Prochaines étapes</h2>
+<ul>
+<li><a href="frontend-integration.html">Intégration Frontend</a></li>
+<li><a href="examples.html">Exemples</a></li>
+<li><a href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="api-reference.html" class="navigation navigation-prev " aria-label="Previous page: API Reference">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="frontend-integration.html" class="navigation navigation-next " aria-label="Next page: Intégration Frontend">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Sécurité","level":"1.6","depth":1,"next":{"title":"Intégration Frontend","level":"1.7","depth":1,"path":"frontend-integration.md","ref":"frontend-integration.md","articles":[]},"previous":{"title":"API Reference","level":"1.5","depth":1,"path":"api-reference.md","ref":"api-reference.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Yowe Djamal","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"version":"1.0.0"},"title":"BjPass Backend SDK Documentation","language":"fr","gitbook":"*","description":"Documentation complète du SDK backend BjPass pour Laravel"},"file":{"path":"security.md","mtime":"2025-08-14T08:33:02.728Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-08-14T08:41:02.518Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/@honkit/honkit-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

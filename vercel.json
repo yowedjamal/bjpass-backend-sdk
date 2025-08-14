@@ -1,20 +1,9 @@
 {
-  "buildCommand": "npm install -g honkit && cd docs && honkit build . ../_book && cp redirect.html ../_book/redirect.html",
+  "buildCommand": "npm install -g honkit && cd docs && honkit build . ../_book",
   "outputDirectory": "_book",
   "framework": null,
   "installCommand": "echo 'No install needed'",
   "devCommand": "cd docs && honkit serve . ../_book",
-  "functions": {
-    "api/*.php": {
-      "runtime": "vercel-php@0.6.0"
-    }
-  },
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/$1"
-    }
-  ],
   "headers": [
     {
       "source": "/(.*)",

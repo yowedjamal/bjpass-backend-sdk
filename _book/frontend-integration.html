@@ -1,0 +1,702 @@
+
+<!DOCTYPE HTML>
+<html lang="fr" >
+    <head>
+        <meta charset="UTF-8">
+        <title>Intégration Frontend · BjPass Backend SDK Documentation</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 6.0.3">
+        <meta name="author" content="Yowe Djamal">
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/@honkit/honkit-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/@honkit/honkit-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="examples.html" />
+    
+    
+    <link rel="prev" href="security.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Tapez pour rechercher" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="installation.html">
+            
+                <a href="installation.html">
+            
+                    
+                    Installation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="configuration.html">
+            
+                <a href="configuration.html">
+            
+                    
+                    Configuration
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="usage.html">
+            
+                <a href="usage.html">
+            
+                    
+                    Utilisation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="api-reference.html">
+            
+                <a href="api-reference.html">
+            
+                    
+                    API Reference
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="security.html">
+            
+                <a href="security.html">
+            
+                    
+                    Sécurité
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.7" data-path="frontend-integration.html">
+            
+                <a href="frontend-integration.html">
+            
+                    
+                    Intégration Frontend
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="examples.html">
+            
+                <a href="examples.html">
+            
+                    
+                    Exemples
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="troubleshooting.html">
+            
+                <a href="troubleshooting.html">
+            
+                    
+                    Troubleshooting
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="changelog.html">
+            
+                <a href="changelog.html">
+            
+                    
+                    Changelog
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Publié avec HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Intégration Frontend</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="intégration-frontend">Intégration Frontend</h1>
+<h2 id="vue-densemble">Vue d'ensemble</h2>
+<p>Cette section détaille les modifications nécessaires dans votre SDK frontend existant pour l'intégrer parfaitement avec le BjPass Backend SDK.</p>
+<h2 id="modifications-requises">Modifications requises</h2>
+<h3 id="1-configuration">1. Configuration</h3>
+<h4 id="nouveaux-paramètres">Nouveaux paramètres</h4>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> config = {
+    <span class="hljs-comment">// Configuration existante</span>
+    <span class="hljs-attr">clientId</span>: <span class="hljs-string">'your_client_id'</span>,
+    <span class="hljs-attr">redirectUri</span>: <span class="hljs-string">'https://your-app.com/auth/callback'</span>,
+
+    <span class="hljs-comment">// Nouveaux paramètres pour le backend</span>
+    <span class="hljs-attr">backendUrl</span>: <span class="hljs-string">'https://your-api.com'</span>,
+    <span class="hljs-attr">backendEndpoints</span>: {
+        <span class="hljs-attr">start</span>: <span class="hljs-string">'/auth/start'</span>,
+        <span class="hljs-attr">status</span>: <span class="hljs-string">'/auth/status'</span>,
+        <span class="hljs-attr">user</span>: <span class="hljs-string">'/auth/user'</span>,
+        <span class="hljs-attr">logout</span>: <span class="hljs-string">'/auth/logout'</span>,
+        <span class="hljs-attr">refresh</span>: <span class="hljs-string">'/auth/refresh'</span>,
+        <span class="hljs-attr">introspect</span>: <span class="hljs-string">'/auth/introspect'</span>
+    },
+    <span class="hljs-attr">frontendOrigin</span>: <span class="hljs-string">'https://your-frontend.com'</span>,
+    <span class="hljs-attr">backendOrigin</span>: <span class="hljs-string">'https://your-api.com'</span>,
+    <span class="hljs-attr">useBackend</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">popupMode</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">autoClosePopup</span>: <span class="hljs-literal">true</span>
+};
+</code></pre>
+<h3 id="2-méthode-startauthflow">2. Méthode <code>startAuthFlow</code></h3>
+<h4 id="avant-sdk-frontend-uniquement">Avant (SDK frontend uniquement)</h4>
+<pre><code class="lang-javascript"><span class="hljs-title function_">startAuthFlow</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">const</span> state = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">generateState</span>();
+    <span class="hljs-keyword">const</span> nonce = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">generateNonce</span>();
+    <span class="hljs-keyword">const</span> codeVerifier = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">generateCodeVerifier</span>();
+
+    <span class="hljs-comment">// Stockage local</span>
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span> = state;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">nonce</span> = nonce;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">codeVerifier</span> = codeVerifier;
+
+    <span class="hljs-comment">// Construction de l'URL</span>
+    <span class="hljs-keyword">const</span> authUrl = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">buildAuthorizationUrl</span>({
+        state,
+        nonce,
+        <span class="hljs-attr">code_challenge</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">generateCodeChallenge</span>(codeVerifier)
+    });
+
+    <span class="hljs-comment">// Redirection</span>
+    <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">popupMode</span>) {
+        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">openPopup</span>(authUrl);
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-variable language_">window</span>.<span class="hljs-property">location</span>.<span class="hljs-property">href</span> = authUrl;
+    }
+}
+</code></pre>
+<h4 id="après-avec-backend">Après (avec backend)</h4>
+<pre><code class="lang-javascript"><span class="hljs-keyword">async</span> <span class="hljs-title function_">startAuthFlow</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-comment">// Délégation au backend</span>
+        <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-variable language_">this</span>.config.backendUrl}</span><span class="hljs-subst">${<span class="hljs-variable language_">this</span>.config.backendEndpoints.start}</span>`</span>, {
+            <span class="hljs-attr">method</span>: <span class="hljs-string">'GET'</span>,
+            <span class="hljs-attr">credentials</span>: <span class="hljs-string">'include'</span>
+        });
+
+        <span class="hljs-keyword">if</span> (response.<span class="hljs-property">ok</span>) {
+            <span class="hljs-keyword">const</span> { authUrl } = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
+
+            <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">config</span>.<span class="hljs-property">popupMode</span>) {
+                <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">openPopup</span>(authUrl);
+            } <span class="hljs-keyword">else</span> {
+                <span class="hljs-variable language_">window</span>.<span class="hljs-property">location</span>.<span class="hljs-property">href</span> = authUrl;
+            }
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">'Failed to get authorization URL'</span>);
+        }
+    } <span class="hljs-keyword">catch</span> (error) {
+        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">handleError</span>(error);
+    }
+}
+</code></pre>
+<h3 id="3-écouteur-de-messages">3. Écouteur de messages</h3>
+<h4 id="validation-des-origines">Validation des origines</h4>
+<pre><code class="lang-javascript"><span class="hljs-title function_">setupMessageListener</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-variable language_">window</span>.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">'message'</span>, <span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> {
+        <span class="hljs-comment">// Validation stricte des origines</span>
+        <span class="hljs-keyword">if</span> (event.<span class="hljs-property">origin</span> !== <span class="hljs-variable language_">this</span>.<span class="hljs-property">config</span>.<span class="hljs-property">backendOrigin</span>) {
+            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">warn</span>(<span class="hljs-string">'Message from unauthorized origin:'</span>, event.<span class="hljs-property">origin</span>);
+            <span class="hljs-keyword">return</span>;
+        }
+
+        <span class="hljs-keyword">if</span> (event.<span class="hljs-property">data</span>.<span class="hljs-property">type</span> === <span class="hljs-string">'bjpass-auth-response'</span>) {
+            <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">handleAuthResponse</span>(event.<span class="hljs-property">data</span>);
+        }
+    });
+}
+</code></pre>
+<h4 id="gestion-des-réponses">Gestion des réponses</h4>
+<pre><code class="lang-javascript"><span class="hljs-title function_">handleAuthResponse</span>(<span class="hljs-params">data</span>) {
+    <span class="hljs-keyword">if</span> (data.<span class="hljs-property">status</span> === <span class="hljs-string">'success'</span>) {
+        <span class="hljs-variable language_">this</span>.<span class="hljs-property">userInfo</span> = data.<span class="hljs-property">user</span>;
+        <span class="hljs-variable language_">this</span>.<span class="hljs-property">isAuthenticated</span> = <span class="hljs-literal">true</span>;
+
+        <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">config</span>.<span class="hljs-property">autoClosePopup</span> &amp;&amp; <span class="hljs-variable language_">this</span>.<span class="hljs-property">popup</span>) {
+            <span class="hljs-variable language_">this</span>.<span class="hljs-property">popup</span>.<span class="hljs-title function_">close</span>();
+        }
+
+        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">emit</span>(<span class="hljs-string">'authenticated'</span>, data.<span class="hljs-property">user</span>);
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">handleError</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(data.<span class="hljs-property">message</span>));
+    }
+}
+</code></pre>
+<h3 id="4-nouvelles-méthodes">4. Nouvelles méthodes</h3>
+<h4 id="vérification-du-statut">Vérification du statut</h4>
+<pre><code class="lang-javascript"><span class="hljs-keyword">async</span> <span class="hljs-title function_">verifyBackendStatus</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-variable language_">this</span>.config.backendUrl}</span><span class="hljs-subst">${<span class="hljs-variable language_">this</span>.config.backendEndpoints.status}</span>`</span>, {
+            <span class="hljs-attr">method</span>: <span class="hljs-string">'GET'</span>,
+            <span class="hljs-attr">credentials</span>: <span class="hljs-string">'include'</span>
+        });
+
+        <span class="hljs-keyword">if</span> (response.<span class="hljs-property">ok</span>) {
+            <span class="hljs-keyword">const</span> { authenticated, user } = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
+            <span class="hljs-variable language_">this</span>.<span class="hljs-property">isAuthenticated</span> = authenticated;
+            <span class="hljs-variable language_">this</span>.<span class="hljs-property">userInfo</span> = user;
+            <span class="hljs-keyword">return</span> { authenticated, user };
+        }
+
+        <span class="hljs-keyword">return</span> { <span class="hljs-attr">authenticated</span>: <span class="hljs-literal">false</span>, <span class="hljs-attr">user</span>: <span class="hljs-literal">null</span> };
+    } <span class="hljs-keyword">catch</span> (error) {
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">'Status check failed:'</span>, error);
+        <span class="hljs-keyword">return</span> { <span class="hljs-attr">authenticated</span>: <span class="hljs-literal">false</span>, <span class="hljs-attr">user</span>: <span class="hljs-literal">null</span> };
+    }
+}
+</code></pre>
+<h4 id="récupération-des-informations-utilisateur">Récupération des informations utilisateur</h4>
+<pre><code class="lang-javascript"><span class="hljs-keyword">async</span> <span class="hljs-title function_">getUserInfoFromBackend</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-variable language_">this</span>.config.backendUrl}</span><span class="hljs-subst">${<span class="hljs-variable language_">this</span>.config.backendEndpoints.user}</span>`</span>, {
+            <span class="hljs-attr">method</span>: <span class="hljs-string">'GET'</span>,
+            <span class="hljs-attr">credentials</span>: <span class="hljs-string">'include'</span>
+        });
+
+        <span class="hljs-keyword">if</span> (response.<span class="hljs-property">ok</span>) {
+            <span class="hljs-keyword">const</span> user = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
+            <span class="hljs-variable language_">this</span>.<span class="hljs-property">userInfo</span> = user;
+            <span class="hljs-keyword">return</span> user;
+        }
+
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">'Failed to get user info'</span>);
+    } <span class="hljs-keyword">catch</span> (error) {
+        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">handleError</span>(error);
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+    }
+}
+</code></pre>
+<h4 id="déconnexion">Déconnexion</h4>
+<pre><code class="lang-javascript"><span class="hljs-keyword">async</span> <span class="hljs-title function_">logoutFromBackend</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-variable language_">this</span>.config.backendUrl}</span><span class="hljs-subst">${<span class="hljs-variable language_">this</span>.config.backendEndpoints.logout}</span>`</span>, {
+            <span class="hljs-attr">method</span>: <span class="hljs-string">'POST'</span>,
+            <span class="hljs-attr">credentials</span>: <span class="hljs-string">'include'</span>
+        });
+
+        <span class="hljs-keyword">if</span> (response.<span class="hljs-property">ok</span>) {
+            <span class="hljs-variable language_">this</span>.<span class="hljs-property">isAuthenticated</span> = <span class="hljs-literal">false</span>;
+            <span class="hljs-variable language_">this</span>.<span class="hljs-property">userInfo</span> = <span class="hljs-literal">null</span>;
+            <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">emit</span>(<span class="hljs-string">'loggedOut'</span>);
+        }
+    } <span class="hljs-keyword">catch</span> (error) {
+        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">handleError</span>(error);
+    }
+}
+</code></pre>
+<h4 id="rafraîchissement-de-token">Rafraîchissement de token</h4>
+<pre><code class="lang-javascript"><span class="hljs-keyword">async</span> <span class="hljs-title function_">refreshToken</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-variable language_">this</span>.config.backendUrl}</span><span class="hljs-subst">${<span class="hljs-variable language_">this</span>.config.backendEndpoints.refresh}</span>`</span>, {
+            <span class="hljs-attr">method</span>: <span class="hljs-string">'POST'</span>,
+            <span class="hljs-attr">credentials</span>: <span class="hljs-string">'include'</span>
+        });
+
+        <span class="hljs-keyword">if</span> (response.<span class="hljs-property">ok</span>) {
+            <span class="hljs-keyword">const</span> { user } = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
+            <span class="hljs-variable language_">this</span>.<span class="hljs-property">userInfo</span> = user;
+            <span class="hljs-keyword">return</span> user;
+        }
+
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">'Token refresh failed'</span>);
+    } <span class="hljs-keyword">catch</span> (error) {
+        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">handleError</span>(error);
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+    }
+}
+</code></pre>
+<h2 id="configuration-recommandée">Configuration recommandée</h2>
+<h3 id="configuration-minimale">Configuration minimale</h3>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> bjpass = <span class="hljs-keyword">new</span> <span class="hljs-title class_">BjPassAuth</span>({
+    <span class="hljs-attr">clientId</span>: <span class="hljs-string">'your_client_id'</span>,
+    <span class="hljs-attr">backendUrl</span>: <span class="hljs-string">'https://your-api.com'</span>,
+    <span class="hljs-attr">useBackend</span>: <span class="hljs-literal">true</span>
+});
+</code></pre>
+<h3 id="configuration-avancée">Configuration avancée</h3>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> bjpass = <span class="hljs-keyword">new</span> <span class="hljs-title class_">BjPassAuth</span>({
+    <span class="hljs-attr">clientId</span>: <span class="hljs-string">'your_client_id'</span>,
+    <span class="hljs-attr">backendUrl</span>: <span class="hljs-string">'https://your-api.com'</span>,
+    <span class="hljs-attr">backendEndpoints</span>: {
+        <span class="hljs-attr">start</span>: <span class="hljs-string">'/auth/start'</span>,
+        <span class="hljs-attr">status</span>: <span class="hljs-string">'/auth/status'</span>,
+        <span class="hljs-attr">user</span>: <span class="hljs-string">'/auth/user'</span>,
+        <span class="hljs-attr">logout</span>: <span class="hljs-string">'/auth/logout'</span>,
+        <span class="hljs-attr">refresh</span>: <span class="hljs-string">'/auth/refresh'</span>,
+        <span class="hljs-attr">introspect</span>: <span class="hljs-string">'/auth/introspect'</span>
+    },
+    <span class="hljs-attr">frontendOrigin</span>: <span class="hljs-string">'https://your-frontend.com'</span>,
+    <span class="hljs-attr">backendOrigin</span>: <span class="hljs-string">'https://your-api.com'</span>,
+    <span class="hljs-attr">useBackend</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">popupMode</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">autoClosePopup</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">onAuthenticated</span>: <span class="hljs-function">(<span class="hljs-params">user</span>) =&gt;</span> {
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'User authenticated:'</span>, user);
+    },
+    <span class="hljs-attr">onError</span>: <span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> {
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">'Authentication error:'</span>, error);
+    }
+});
+</code></pre>
+<h2 id="flux-complet">Flux complet</h2>
+<h3 id="1-initialisation">1. Initialisation</h3>
+<pre><code class="lang-javascript"><span class="hljs-comment">// L'utilisateur clique sur "Se connecter"</span>
+bjpass.<span class="hljs-title function_">startAuthFlow</span>();
+</code></pre>
+<h3 id="2-redirection">2. Redirection</h3>
+<pre><code class="lang-javascript"><span class="hljs-comment">// Le backend génère l'URL d'autorisation</span>
+<span class="hljs-comment">// Redirection vers le provider OIDC</span>
+</code></pre>
+<h3 id="3-authentification">3. Authentification</h3>
+<pre><code class="lang-javascript"><span class="hljs-comment">// L'utilisateur s'authentifie sur le provider</span>
+<span class="hljs-comment">// Redirection vers le callback du backend</span>
+</code></pre>
+<h3 id="4-traitement">4. Traitement</h3>
+<pre><code class="lang-javascript"><span class="hljs-comment">// Le backend traite le callback</span>
+<span class="hljs-comment">// Stockage des tokens en session</span>
+<span class="hljs-comment">// Affichage de la page de succès</span>
+</code></pre>
+<h3 id="5-communication">5. Communication</h3>
+<pre><code class="lang-javascript"><span class="hljs-comment">// La page de succès envoie un message au frontend</span>
+<span class="hljs-comment">// Le frontend reçoit les informations utilisateur</span>
+<span class="hljs-comment">// Fermeture automatique de la popup</span>
+</code></pre>
+<h3 id="6-vérification">6. Vérification</h3>
+<pre><code class="lang-javascript"><span class="hljs-comment">// Le frontend peut vérifier le statut</span>
+<span class="hljs-keyword">const</span> { authenticated, user } = <span class="hljs-keyword">await</span> bjpass.<span class="hljs-title function_">verifyBackendStatus</span>();
+
+<span class="hljs-keyword">if</span> (authenticated) {
+    <span class="hljs-comment">// Utilisateur connecté</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Welcome,'</span>, user.<span class="hljs-property">name</span>);
+}
+</code></pre>
+<h2 id="sécurité">Sécurité</h2>
+<h3 id="validation-des-origines">Validation des origines</h3>
+<pre><code class="lang-javascript"><span class="hljs-comment">// Toujours valider l'origine des messages</span>
+<span class="hljs-keyword">if</span> (event.<span class="hljs-property">origin</span> !== <span class="hljs-variable language_">this</span>.<span class="hljs-property">config</span>.<span class="hljs-property">backendOrigin</span>) {
+    <span class="hljs-keyword">return</span>;
+}
+</code></pre>
+<h3 id="cookies-sécurisés">Cookies sécurisés</h3>
+<pre><code class="lang-javascript"><span class="hljs-comment">// Utilisation de credentials: 'include' pour les cookies</span>
+<span class="hljs-title function_">fetch</span>(url, {
+    <span class="hljs-attr">credentials</span>: <span class="hljs-string">'include'</span>,
+    <span class="hljs-comment">// ...</span>
+});
+</code></pre>
+<h3 id="gestion-des-erreurs">Gestion des erreurs</h3>
+<pre><code class="lang-javascript"><span class="hljs-comment">// Ne jamais exposer d'informations sensibles</span>
+<span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">'Authentication failed'</span>);
+    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">emit</span>(<span class="hljs-string">'error'</span>, { <span class="hljs-attr">message</span>: <span class="hljs-string">'Authentication failed'</span> });
+}
+</code></pre>
+<h2 id="migration-depuis-lancien-sdk">Migration depuis l'ancien SDK</h2>
+<h3 id="étapes-de-migration">Étapes de migration</h3>
+<ol>
+<li><p><strong>Mise à jour de la configuration</strong></p>
+<ul>
+<li>Ajouter <code>backendUrl</code> et <code>useBackend: true</code></li>
+<li>Configurer les endpoints backend</li>
+</ul>
+</li>
+<li><p><strong>Modification des méthodes</strong></p>
+<ul>
+<li>Remplacer <code>startAuthFlow</code> par la version backend</li>
+<li>Ajouter les nouvelles méthodes de vérification</li>
+</ul>
+</li>
+<li><p><strong>Tests</strong></p>
+<ul>
+<li>Vérifier l'authentification complète</li>
+<li>Tester la déconnexion</li>
+<li>Valider la gestion des erreurs</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-de-migration">Code de migration</h3>
+<pre><code class="lang-javascript"><span class="hljs-comment">// Ancien code</span>
+<span class="hljs-keyword">const</span> authUrl = bjpass.<span class="hljs-title function_">buildAuthorizationUrl</span>();
+
+<span class="hljs-comment">// Nouveau code</span>
+<span class="hljs-keyword">const</span> { authUrl } = <span class="hljs-keyword">await</span> bjpass.<span class="hljs-title function_">getBackendAuthUrl</span>();
+</code></pre>
+<h2 id="prochaines-étapes">Prochaines étapes</h2>
+<ul>
+<li><a href="examples.html">Exemples</a></li>
+<li><a href="troubleshooting.html">Troubleshooting</a></li>
+<li><a href="api-reference.html">API Reference</a></li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="security.html" class="navigation navigation-prev " aria-label="Previous page: Sécurité">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="examples.html" class="navigation navigation-next " aria-label="Next page: Exemples">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Intégration Frontend","level":"1.7","depth":1,"next":{"title":"Exemples","level":"1.8","depth":1,"path":"examples.md","ref":"examples.md","articles":[]},"previous":{"title":"Sécurité","level":"1.6","depth":1,"path":"security.md","ref":"security.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Yowe Djamal","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"version":"1.0.0"},"title":"BjPass Backend SDK Documentation","language":"fr","gitbook":"*","description":"Documentation complète du SDK backend BjPass pour Laravel"},"file":{"path":"frontend-integration.md","mtime":"2025-08-14T08:33:02.722Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-08-14T08:41:02.518Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/@honkit/honkit-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

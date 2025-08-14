@@ -1,0 +1,593 @@
+
+<!DOCTYPE HTML>
+<html lang="fr" >
+    <head>
+        <meta charset="UTF-8">
+        <title>API Reference · BjPass Backend SDK Documentation</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 6.0.3">
+        <meta name="author" content="Yowe Djamal">
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/@honkit/honkit-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/@honkit/honkit-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="security.html" />
+    
+    
+    <link rel="prev" href="usage.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Tapez pour rechercher" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="installation.html">
+            
+                <a href="installation.html">
+            
+                    
+                    Installation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="configuration.html">
+            
+                <a href="configuration.html">
+            
+                    
+                    Configuration
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="usage.html">
+            
+                <a href="usage.html">
+            
+                    
+                    Utilisation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5" data-path="api-reference.html">
+            
+                <a href="api-reference.html">
+            
+                    
+                    API Reference
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="security.html">
+            
+                <a href="security.html">
+            
+                    
+                    Sécurité
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="frontend-integration.html">
+            
+                <a href="frontend-integration.html">
+            
+                    
+                    Intégration Frontend
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="examples.html">
+            
+                <a href="examples.html">
+            
+                    
+                    Exemples
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="troubleshooting.html">
+            
+                <a href="troubleshooting.html">
+            
+                    
+                    Troubleshooting
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="changelog.html">
+            
+                <a href="changelog.html">
+            
+                    
+                    Changelog
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Publié avec HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >API Reference</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="api-reference">API Reference</h1>
+<h2 id="classe-bjpass">Classe BjPass</h2>
+<h3 id="méthodes-publiques">Méthodes publiques</h3>
+<h4 id="createauthorizationurlarray-params--"><code>createAuthorizationUrl(array $params = [])</code></h4>
+<p>Crée une URL d'autorisation OIDC avec PKCE.</p>
+<p><strong>Paramètres :</strong></p>
+<ul>
+<li><code>$params</code> (array) - Paramètres optionnels<ul>
+<li><code>state</code> (string) - État personnalisé</li>
+<li><code>nonce</code> (string) - Nonce personnalisé</li>
+<li><code>redirect_after_login</code> (string) - URL de redirection après connexion</li>
+</ul>
+</li>
+</ul>
+<p><strong>Retourne :</strong> string - URL d'autorisation</p>
+<p><strong>Exemple :</strong></p>
+<pre><code class="lang-php"><span class="hljs-variable">$authUrl</span> = <span class="hljs-title class_">BjPass</span>::<span class="hljs-title function_ invoke__">createAuthorizationUrl</span>([
+    <span class="hljs-string">'state'</span> =&gt; <span class="hljs-string">'custom_state'</span>,
+    <span class="hljs-string">'redirect_after_login'</span> =&gt; <span class="hljs-string">'/dashboard'</span>
+]);
+</code></pre>
+<h4 id="exchangecodestring-code-string-state-string-sessionid"><code>exchangeCode(string $code, string $state, string $sessionId)</code></h4>
+<p>Échange le code d'autorisation contre des tokens.</p>
+<p><strong>Paramètres :</strong></p>
+<ul>
+<li><code>$code</code> (string) - Code d'autorisation</li>
+<li><code>$state</code> (string) - État retourné par le provider</li>
+<li><code>$sessionId</code> (string) - ID de session</li>
+</ul>
+<p><strong>Retourne :</strong> array - Informations utilisateur et tokens</p>
+<p><strong>Exemple :</strong></p>
+<pre><code class="lang-php"><span class="hljs-keyword">try</span> {
+    <span class="hljs-variable">$user</span> = <span class="hljs-title class_">BjPass</span>::<span class="hljs-title function_ invoke__">exchangeCode</span>(<span class="hljs-variable">$code</span>, <span class="hljs-variable">$state</span>, <span class="hljs-title function_ invoke__">session</span>()-&gt;<span class="hljs-title function_ invoke__">getId</span>());
+    <span class="hljs-comment">// $user contient les informations utilisateur</span>
+} <span class="hljs-keyword">catch</span> (AuthenticationException <span class="hljs-variable">$e</span>) {
+    <span class="hljs-comment">// Gérer l'erreur</span>
+}
+</code></pre>
+<h4 id="validateidtokenstring-idtoken"><code>validateIdToken(string $idToken)</code></h4>
+<p>Valide un token ID JWT.</p>
+<p><strong>Paramètres :</strong></p>
+<ul>
+<li><code>$idToken</code> (string) - Token ID à valider</li>
+</ul>
+<p><strong>Retourne :</strong> array - Claims du token</p>
+<p><strong>Exemple :</strong></p>
+<pre><code class="lang-php"><span class="hljs-keyword">try</span> {
+    <span class="hljs-variable">$claims</span> = <span class="hljs-title class_">BjPass</span>::<span class="hljs-title function_ invoke__">validateIdToken</span>(<span class="hljs-variable">$idToken</span>);
+    <span class="hljs-variable">$userId</span> = <span class="hljs-variable">$claims</span>[<span class="hljs-string">'sub'</span>];
+} <span class="hljs-keyword">catch</span> (InvalidTokenException <span class="hljs-variable">$e</span>) {
+    <span class="hljs-comment">// Token invalide</span>
+}
+</code></pre>
+<h4 id="introspecttokenstring-accesstoken"><code>introspectToken(string $accessToken)</code></h4>
+<p>Interroge le statut d'un token d'accès.</p>
+<p><strong>Paramètres :</strong></p>
+<ul>
+<li><code>$accessToken</code> (string) - Token d'accès à interroger</li>
+</ul>
+<p><strong>Retourne :</strong> array - Informations sur le token</p>
+<p><strong>Exemple :</strong></p>
+<pre><code class="lang-php"><span class="hljs-variable">$tokenInfo</span> = <span class="hljs-title class_">BjPass</span>::<span class="hljs-title function_ invoke__">introspectToken</span>(<span class="hljs-variable">$accessToken</span>);
+<span class="hljs-keyword">if</span> (<span class="hljs-variable">$tokenInfo</span>[<span class="hljs-string">'active'</span>]) {
+    <span class="hljs-comment">// Token valide</span>
+}
+</code></pre>
+<h4 id="refreshtokenstring-refreshtoken--null"><code>refreshToken(string $refreshToken = null)</code></h4>
+<p>Rafraîchit un token d'accès.</p>
+<p><strong>Paramètres :</strong></p>
+<ul>
+<li><code>$refreshToken</code> (string|null) - Token de rafraîchissement (optionnel)</li>
+</ul>
+<p><strong>Retourne :</strong> array - Nouveaux tokens</p>
+<p><strong>Exemple :</strong></p>
+<pre><code class="lang-php"><span class="hljs-keyword">try</span> {
+    <span class="hljs-variable">$newTokens</span> = <span class="hljs-title class_">BjPass</span>::<span class="hljs-title function_ invoke__">refreshToken</span>();
+    <span class="hljs-comment">// Nouveaux tokens stockés automatiquement</span>
+} <span class="hljs-keyword">catch</span> (AuthenticationException <span class="hljs-variable">$e</span>) {
+    <span class="hljs-comment">// Rediriger vers la connexion</span>
+}
+</code></pre>
+<h4 id="revoketokenstring-token"><code>revokeToken(string $token)</code></h4>
+<p>Révoque un token.</p>
+<p><strong>Paramètres :</strong></p>
+<ul>
+<li><code>$token</code> (string) - Token à révoquer</li>
+</ul>
+<p><strong>Retourne :</strong> bool - Succès de la révocation</p>
+<p><strong>Exemple :</strong></p>
+<pre><code class="lang-php"><span class="hljs-variable">$revoked</span> = <span class="hljs-title class_">BjPass</span>::<span class="hljs-title function_ invoke__">revokeToken</span>(<span class="hljs-variable">$accessToken</span>);
+<span class="hljs-keyword">if</span> (<span class="hljs-variable">$revoked</span>) {
+    <span class="hljs-comment">// Token révoqué avec succès</span>
+}
+</code></pre>
+<h4 id="getuserinfostring-accesstoken--null"><code>getUserInfo(string $accessToken = null)</code></h4>
+<p>Récupère les informations utilisateur.</p>
+<p><strong>Paramètres :</strong></p>
+<ul>
+<li><code>$accessToken</code> (string|null) - Token d'accès (optionnel)</li>
+</ul>
+<p><strong>Retourne :</strong> array|null - Informations utilisateur</p>
+<p><strong>Exemple :</strong></p>
+<pre><code class="lang-php"><span class="hljs-variable">$userInfo</span> = <span class="hljs-title class_">BjPass</span>::<span class="hljs-title function_ invoke__">getUserInfo</span>();
+<span class="hljs-keyword">if</span> (<span class="hljs-variable">$userInfo</span>) {
+    <span class="hljs-variable">$email</span> = <span class="hljs-variable">$userInfo</span>[<span class="hljs-string">'email'</span>];
+    <span class="hljs-variable">$name</span> = <span class="hljs-variable">$userInfo</span>[<span class="hljs-string">'name'</span>];
+}
+</code></pre>
+<h4 id="isauthenticated"><code>isAuthenticated()</code></h4>
+<p>Vérifie si l'utilisateur est authentifié.</p>
+<p><strong>Retourne :</strong> bool - Statut d'authentification</p>
+<p><strong>Exemple :</strong></p>
+<pre><code class="lang-php"><span class="hljs-keyword">if</span> (<span class="hljs-title class_">BjPass</span>::<span class="hljs-title function_ invoke__">isAuthenticated</span>()) {
+    <span class="hljs-comment">// Utilisateur connecté</span>
+} <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">// Utilisateur non connecté</span>
+}
+</code></pre>
+<h4 id="logout"><code>logout()</code></h4>
+<p>Déconnecte l'utilisateur.</p>
+<p><strong>Exemple :</strong></p>
+<pre><code class="lang-php"><span class="hljs-title class_">BjPass</span>::<span class="hljs-title function_ invoke__">logout</span>();
+<span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">redirect</span>(<span class="hljs-string">'/'</span>);
+</code></pre>
+<h2 id="services">Services</h2>
+<h3 id="jwksservice">JwksService</h3>
+<h4 id="getjwks"><code>getJwks()</code></h4>
+<p>Récupère les clés JWKS depuis le cache ou le provider.</p>
+<p><strong>Retourne :</strong> array - Clés JWKS</p>
+<h4 id="clearcache"><code>clearCache()</code></h4>
+<p>Efface le cache des clés JWKS.</p>
+<h4 id="refreshjwks"><code>refreshJwks()</code></h4>
+<p>Force le rafraîchissement des clés JWKS.</p>
+<h3 id="tokenservice">TokenService</h3>
+<h4 id="parsejwtstring-token"><code>parseJwt(string $token)</code></h4>
+<p>Parse un token JWT sans validation.</p>
+<p><strong>Paramètres :</strong></p>
+<ul>
+<li><code>$token</code> (string) - Token JWT</li>
+</ul>
+<p><strong>Retourne :</strong> array - Claims du token</p>
+<h4 id="istokenexpiredarray-claims"><code>isTokenExpired(array $claims)</code></h4>
+<p>Vérifie si un token est expiré.</p>
+<p><strong>Paramètres :</strong></p>
+<ul>
+<li><code>$claims</code> (array) - Claims du token</li>
+</ul>
+<p><strong>Retourne :</strong> bool - Token expiré</p>
+<h2 id="exceptions">Exceptions</h2>
+<h3 id="bjpassexception">BjPassException</h3>
+<p>Exception de base pour toutes les erreurs BjPass.</p>
+<p><strong>Méthodes :</strong></p>
+<ul>
+<li><code>getContext()</code> - Retourne le contexte de l'erreur</li>
+</ul>
+<h3 id="invalidtokenexception">InvalidTokenException</h3>
+<p>Exception levée lors de la validation de token.</p>
+<p><strong>Méthodes statiques :</strong></p>
+<ul>
+<li><code>expired()</code> - Token expiré</li>
+<li><code>invalidSignature()</code> - Signature invalide</li>
+<li><code>invalidAudience()</code> - Audience invalide</li>
+<li><code>invalidIssuer()</code> - Émetteur invalide</li>
+<li><code>invalidNonce()</code> - Nonce invalide</li>
+<li><code>malformed()</code> - Token malformé</li>
+</ul>
+<h3 id="authenticationexception">AuthenticationException</h3>
+<p>Exception levée lors du processus d'authentification.</p>
+<p><strong>Méthodes statiques :</strong></p>
+<ul>
+<li><code>invalidState()</code> - État invalide</li>
+<li><code>invalidCode()</code> - Code invalide</li>
+<li><code>codeExchangeFailed()</code> - Échec de l'échange de code</li>
+<li><code>userNotAuthenticated()</code> - Utilisateur non authentifié</li>
+</ul>
+<h2 id="middleware">Middleware</h2>
+<h3 id="bjpassauthmiddleware">BjPassAuthMiddleware</h3>
+<p>Protège les routes en vérifiant l'authentification.</p>
+<p><strong>Utilisation :</strong></p>
+<pre><code class="lang-php"><span class="hljs-title class_">Route</span>::<span class="hljs-title function_ invoke__">middleware</span>(<span class="hljs-string">'bjpass.auth'</span>)-&gt;<span class="hljs-title function_ invoke__">group</span>(function () {
+    <span class="hljs-comment">// Routes protégées</span>
+});
+</code></pre>
+<h2 id="configuration">Configuration</h2>
+<h3 id="variables-denvironnement">Variables d'environnement</h3>
+<pre><code class="lang-env"># Configuration OIDC
+BJPASS_CLIENT_ID=your_client_id
+BJPASS_CLIENT_SECRET=your_client_secret
+BJPASS_REDIRECT_URI=https://your-app.com/auth/callback
+BJPASS_PROVIDER_URL=https://your-provider.com
+BJPASS_SCOPE=openid profile email
+
+# Sécurité
+BJPASS_SESSION_MAX_AGE=3600
+BJPASS_COOKIE_SECURE=true
+BJPASS_COOKIE_SAMESITE=lax
+BJPASS_COOKIE_HTTPONLY=true
+
+# Routes
+BJPASS_ROUTE_PREFIX=auth
+BJPASS_FRONTEND_ORIGIN=https://your-frontend.com
+</code></pre>
+<h2 id="prochaines-étapes">Prochaines étapes</h2>
+<ul>
+<li><a href="security.html">Sécurité</a></li>
+<li><a href="frontend-integration.html">Intégration Frontend</a></li>
+<li><a href="examples.html">Exemples</a></li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="usage.html" class="navigation navigation-prev " aria-label="Previous page: Utilisation">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="security.html" class="navigation navigation-next " aria-label="Next page: Sécurité">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"API Reference","level":"1.5","depth":1,"next":{"title":"Sécurité","level":"1.6","depth":1,"path":"security.md","ref":"security.md","articles":[]},"previous":{"title":"Utilisation","level":"1.4","depth":1,"path":"usage.md","ref":"usage.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Yowe Djamal","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"version":"1.0.0"},"title":"BjPass Backend SDK Documentation","language":"fr","gitbook":"*","description":"Documentation complète du SDK backend BjPass pour Laravel"},"file":{"path":"api-reference.md","mtime":"2025-08-14T08:33:02.718Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-08-14T08:41:02.518Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/@honkit/honkit-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

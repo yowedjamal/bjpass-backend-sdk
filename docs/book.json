@@ -7,15 +7,6 @@
     "readme": "README.md",
     "summary": "SUMMARY.md"
   },
-  "plugins": [
-    "search",
-    "copy-code-button"
-  ],
-  "pluginsConfig": {
-    "search": {
-      "maxIndexSize": 100000
-    }
-  },
   "variables": {
     "version": "1.0.0"
   }

@@ -46,10 +46,10 @@ echo -e "${GREEN}🚀 Démarrage release $VERSION...${NC}"
 git flow release start $VERSION
 
 # 2. MAJ version MANUELLE (au lieu de npm version)
-echo -e "${GREEN}🔄 Mise à jour version composer.json...${NC}"
-perl -pi -e "s/\"version\": \".*?\"/\"version\": \"$VERSION\"/" composer.json
-git add composer.json
-git commit -m "chore(release): v$VERSION [skip ci]"
+# echo -e "${GREEN}🔄 Mise à jour version composer.json...${NC}"
+# perl -pi -e "s/\"version\": \".*?\"/\"version\": \"$VERSION\"/" composer.json
+# git add composer.json
+# git commit -m "chore(release): v$VERSION [skip ci]"
 
 # 3. Finalisation
 echo -e "${GREEN}🏁 Finalisation release...${NC}"

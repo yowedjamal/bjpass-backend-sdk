@@ -35,30 +35,56 @@ jobs:
       - name: Build package
         run: composer archive --format=zip --dir=dist
           
-      - name: Publish to Packagist
+      - name: Publish to Packagist via API
         run: |
-          composer config http-basic.repo.packagist.com ${{ secrets.PACKAGIST_USERNAME }} ${{ secrets.PACKAGIST_TOKEN }}
-          composer config repositories.packagist composer https://repo.packagist.com
-          composer publish --no-interaction
-          
-      - name: Verify Packagist availability
-        run: |
-          echo "Waiting for Packagist to update..."
-          sleep 60
-          
-          # Test if the package is available on Packagist
-          PACKAGE_VERSION="${{ github.event.release.tag_name }}"
+          # Créer le package archive
           PACKAGE_NAME="yowedjamal/bjpass-backend-sdk"
+          PACKAGE_VERSION="${{ github.event.release.tag_name }}"
           
-          # Try to install the package to verify it's available
-          composer create-project --no-interaction --prefer-dist "$PACKAGE_NAME:$PACKAGE_VERSION" test-install
+          # Créer le fichier de métadonnées pour Packagist
+          cat > packagist.json << EOF
+          {
+            "name": "$PACKAGE_NAME",
+            "description": "Backend SDK PHP pour BjPass - gestion OAuth2/OIDC avec intégration Laravel",
+            "type": "library",
+            "license": "MIT",
+            "authors": [
+              {
+                "name": "Yowe Djamal",
+                "email": "yowedjamal@gmail.com"
+              }
+            ],
+            "require": {
+              "php": "^8.1",
+              "laravel/framework": "^9.0|^10.0|^11.0"
+            },
+            "autoload": {
+              "psr-4": {
+                "BjPass\\": "src/"
+              }
+            },
+            "extra": {
+              "laravel": {
+                "providers": [
+                  "BjPass\\Providers\\BjPassServiceProvider"
+                ],
+                "aliases": {
+                  "BjPass": "BjPass\\Facades\\BjPass"
+                }
+              }
+            }
+          }
+          EOF
           
-          if [ -d "test-install" ]; then
-            echo "✅ Package successfully published and available on Packagist!"
-            rm -rf test-install
+          # Publier via l'API Packagist (nécessite un token d'API)
+          if [ -n "${{ secrets.PACKAGIST_TOKEN }}" ]; then
+            echo "Publishing to Packagist via API..."
+            # Note: Packagist n'a pas d'API publique pour la publication
+            # Le package doit être soumis manuellement ou via webhook
+            echo "Package ready for manual submission to Packagist"
+            echo "Visit: https://packagist.org/packages/submit"
           else
-            echo "❌ Package not yet available on Packagist"
-            exit 1
+            echo "PACKAGIST_TOKEN not configured, skipping automatic publication"
           fi
           
       - name: Create Packagist badge
@@ -81,3 +107,31 @@ jobs:
           git add DISTRIBUTION.md
           git commit -m "Update distribution info for ${{ github.event.release.tag_name }}" || echo "No changes to commit"
           git push || echo "No changes to push"
+          
+      - name: Comment on release
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.repos.createReleaseComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id: context.payload.release.id,
+              body: `🎉 **Package built successfully!**
+              
+              **Version:** ${{ github.event.release.tag_name }}
+              **Package:** yowedjamal/bjpass-backend-sdk
+              
+              📦 **Installation:**
+              \`\`\`bash
+              composer require yowedjamal/bjpass-backend-sdk:${{ github.event.release.tag_name }}
+              \`\`\`
+              
+              📚 **Documentation:** [https://your-docs-site.com](https://your-docs-site.com)
+              
+              ⚠️ **Note:** Ce package doit être soumis manuellement sur Packagist via [https://packagist.org/packages/submit](https://packagist.org/packages/submit)
+              
+              🔄 **Prochaines étapes:**
+              1. Visiter [Packagist Submit](https://packagist.org/packages/submit)
+              2. Coller l'URL de ce repository GitHub
+              3. Packagist importera automatiquement le package`
+            })

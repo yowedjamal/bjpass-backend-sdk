@@ -99,39 +99,3 @@ jobs:
           echo "\`\`\`" >> $GITHUB_WORKSPACE/DISTRIBUTION.md
           echo "" >> $GITHUB_WORKSPACE/DISTRIBUTION.md
           echo "**Stats:** [https://packagist.org/packages/yowedjamal/bjpass-backend-sdk](https://packagist.org/packages/yowedjamal/bjpass-backend-sdk)" >> $GITHUB_WORKSPACE/DISTRIBUTION.md
-          
-      - name: Commit distribution info
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add DISTRIBUTION.md
-          git commit -m "Update distribution info for ${{ github.event.release.tag_name }}" || echo "No changes to commit"
-          git push || echo "No changes to push"
-          
-      - name: Comment on release
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.repos.createReleaseComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              release_id: context.payload.release.id,
-              body: `🎉 **Package built successfully!**
-              
-              **Version:** ${{ github.event.release.tag_name }}
-              **Package:** yowedjamal/bjpass-backend-sdk
-              
-              📦 **Installation:**
-              \`\`\`bash
-              composer require yowedjamal/bjpass-backend-sdk:${{ github.event.release.tag_name }}
-              \`\`\`
-              
-              📚 **Documentation:** [https://your-docs-site.com](https://your-docs-site.com)
-              
-              ⚠️ **Note:** Ce package doit être soumis manuellement sur Packagist via [https://packagist.org/packages/submit](https://packagist.org/packages/submit)
-              
-              🔄 **Prochaines étapes:**
-              1. Visiter [Packagist Submit](https://packagist.org/packages/submit)
-              2. Coller l'URL de ce repository GitHub
-              3. Packagist importera automatiquement le package`
-            })

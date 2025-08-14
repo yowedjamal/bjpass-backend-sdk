@@ -1,0 +1,697 @@
+
+<!DOCTYPE HTML>
+<html lang="fr" >
+    <head>
+        <meta charset="UTF-8">
+        <title>Troubleshooting · BjPass Backend SDK Documentation</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 6.0.3">
+        <meta name="author" content="Yowe Djamal">
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/@honkit/honkit-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/@honkit/honkit-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="changelog.html" />
+    
+    
+    <link rel="prev" href="examples.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Tapez pour rechercher" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="installation.html">
+            
+                <a href="installation.html">
+            
+                    
+                    Installation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="configuration.html">
+            
+                <a href="configuration.html">
+            
+                    
+                    Configuration
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="usage.html">
+            
+                <a href="usage.html">
+            
+                    
+                    Utilisation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="api-reference.html">
+            
+                <a href="api-reference.html">
+            
+                    
+                    API Reference
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="security.html">
+            
+                <a href="security.html">
+            
+                    
+                    Sécurité
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="frontend-integration.html">
+            
+                <a href="frontend-integration.html">
+            
+                    
+                    Intégration Frontend
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="examples.html">
+            
+                <a href="examples.html">
+            
+                    
+                    Exemples
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.9" data-path="troubleshooting.html">
+            
+                <a href="troubleshooting.html">
+            
+                    
+                    Troubleshooting
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="changelog.html">
+            
+                <a href="changelog.html">
+            
+                    
+                    Changelog
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Publié avec HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Troubleshooting</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="troubleshooting">Troubleshooting</h1>
+<h2 id="problèmes-courants-et-solutions">Problèmes courants et solutions</h2>
+<h3 id="1-erreurs-de-configuration">1. Erreurs de configuration</h3>
+<h4 id="erreur--client-secret-is-required">Erreur : "Client secret is required"</h4>
+<p><strong>Symptôme :</strong></p>
+<pre><code>ConfigurationException: Client secret is required
+</code></pre><p><strong>Cause :</strong> Variable d'environnement <code>BJPASS_CLIENT_SECRET</code> manquante ou vide.</p>
+<p><strong>Solution :</strong></p>
+<pre><code class="lang-env"># .env
+BJPASS_CLIENT_SECRET=your_actual_client_secret
+</code></pre>
+<p><strong>Vérification :</strong></p>
+<pre><code class="lang-bash">php artisan tinker
+&gt;&gt;&gt; config(<span class="hljs-string">'bjpass.client_secret'</span>)
+</code></pre>
+<h4 id="erreur--invalid-redirect-uri">Erreur : "Invalid redirect URI"</h4>
+<p><strong>Symptôme :</strong></p>
+<pre><code>ConfigurationException: Invalid redirect URI
+</code></pre><p><strong>Cause :</strong> URI de redirection malformée ou non configurée.</p>
+<p><strong>Solution :</strong></p>
+<pre><code class="lang-env"># .env
+BJPASS_REDIRECT_URI=https://your-app.com/auth/callback
+</code></pre>
+<p><strong>Vérification :</strong></p>
+<pre><code class="lang-bash">php artisan route:list | grep callback
+</code></pre>
+<h3 id="2-erreurs-dauthentification">2. Erreurs d'authentification</h3>
+<h4 id="erreur--invalid-state-parameter">Erreur : "Invalid state parameter"</h4>
+<p><strong>Symptôme :</strong></p>
+<pre><code>AuthenticationException: Invalid state parameter
+</code></pre><p><strong>Cause :</strong> Le paramètre <code>state</code> n'a pas été correctement transmis ou validé.</p>
+<p><strong>Solutions possibles :</strong></p>
+<ol>
+<li><p><strong>Vérifier la session :</strong></p>
+<pre><code class="lang-php"><span class="hljs-comment">// Dans votre contrôleur</span>
+<span class="hljs-title function_ invoke__">dd</span>(<span class="hljs-title function_ invoke__">session</span>(<span class="hljs-string">'bjpass_state'</span>));
+</code></pre>
+</li>
+<li><p><strong>Vérifier la configuration des cookies :</strong></p>
+<pre><code class="lang-env">BJPASS_COOKIE_SAMESITE=lax
+BJPASS_COOKIE_HTTPONLY=true
+</code></pre>
+</li>
+<li><p><strong>Vérifier la configuration de session :</strong></p>
+<pre><code class="lang-php"><span class="hljs-comment">// config/session.php</span>
+<span class="hljs-string">'domain'</span> =&gt; <span class="hljs-title function_ invoke__">env</span>(<span class="hljs-string">'SESSION_DOMAIN'</span>, <span class="hljs-literal">null</span>),
+<span class="hljs-string">'secure'</span> =&gt; <span class="hljs-title function_ invoke__">env</span>(<span class="hljs-string">'SESSION_SECURE_COOKIE'</span>, <span class="hljs-literal">true</span>),
+</code></pre>
+</li>
+</ol>
+<h4 id="erreur--invalid-nonce">Erreur : "Invalid nonce"</h4>
+<p><strong>Symptôme :</strong></p>
+<pre><code>InvalidTokenException: Invalid nonce
+</code></pre><p><strong>Cause :</strong> Le nonce généré ne correspond pas à celui dans l'ID token.</p>
+<p><strong>Solution :</strong></p>
+<pre><code class="lang-php"><span class="hljs-comment">// Vérifier que la session est maintenue</span>
+<span class="hljs-keyword">if</span> (!<span class="hljs-title function_ invoke__">session</span>()-&gt;<span class="hljs-title function_ invoke__">has</span>(<span class="hljs-string">'bjpass_nonce'</span>)) {
+    <span class="hljs-title class_">Log</span>::<span class="hljs-title function_ invoke__">error</span>(<span class="hljs-string">'Nonce missing from session'</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">redirect</span>(<span class="hljs-string">'/auth/start'</span>);
+}
+</code></pre>
+<h3 id="3-erreurs-de-validation-de-token">3. Erreurs de validation de token</h3>
+<h4 id="erreur--token-signature-verification-failed">Erreur : "Token signature verification failed"</h4>
+<p><strong>Symptôme :</strong></p>
+<pre><code>InvalidTokenException: Token signature verification failed
+</code></pre><p><strong>Cause :</strong> Problème avec les clés JWKS ou la signature du token.</p>
+<p><strong>Solutions :</strong></p>
+<ol>
+<li><strong>Vider le cache JWKS :</strong>
+```php
+use BjPass\Facades\BjPass;</li>
+</ol>
+<p>BjPass::getJwksService()-&gt;clearCache();</p>
+<pre><code>
+2. **Vérifier l'URL du provider :**
+```env
+BJPASS_PROVIDER_URL=https://your-provider.com
+</code></pre><ol>
+<li><strong>Vérifier l'endpoint JWKS :</strong><pre><code class="lang-php"><span class="hljs-comment">// config/bjpass.php</span>
+<span class="hljs-string">'endpoints'</span> =&gt; [
+ <span class="hljs-string">'jwks'</span> =&gt; <span class="hljs-string">'/.well-known/jwks.json'</span>,
+],
+</code></pre>
+</li>
+</ol>
+<h4 id="erreur--token-expired">Erreur : "Token expired"</h4>
+<p><strong>Symptôme :</strong></p>
+<pre><code>InvalidTokenException: Token expired
+</code></pre><p><strong>Cause :</strong> Le token ID a expiré.</p>
+<p><strong>Solution :</strong></p>
+<pre><code class="lang-php"><span class="hljs-comment">// Vérifier l'heure du serveur</span>
+<span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">now</span>()-&gt;<span class="hljs-title function_ invoke__">toISOString</span>();
+
+<span class="hljs-comment">// Vérifier la configuration de timezone</span>
+<span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">config</span>(<span class="hljs-string">'app.timezone'</span>);
+</code></pre>
+<h3 id="4-erreurs-de-communication-avec-le-provider">4. Erreurs de communication avec le provider</h3>
+<h4 id="erreur--failed-to-fetch-jwks">Erreur : "Failed to fetch JWKS"</h4>
+<p><strong>Symptôme :</strong></p>
+<pre><code>Exception: Failed to fetch JWKS from provider
+</code></pre><p><strong>Cause :</strong> Problème de connectivité ou d'URL.</p>
+<p><strong>Solutions :</strong></p>
+<ol>
+<li><p><strong>Tester la connectivité :</strong></p>
+<pre><code class="lang-bash">curl -v <span class="hljs-string">"https://your-provider.com/.well-known/jwks.json"</span>
+</code></pre>
+</li>
+<li><p><strong>Vérifier les paramètres HTTP :</strong></p>
+<pre><code class="lang-env">BJPASS_HTTP_TIMEOUT=30
+BJPASS_HTTP_VERIFY_SSL=true
+</code></pre>
+</li>
+<li><p><strong>Vérifier le proxy si applicable :</strong></p>
+<pre><code class="lang-php"><span class="hljs-comment">// Dans votre AppServiceProvider</span>
+<span class="hljs-title class_">Http</span>::<span class="hljs-title function_ invoke__">withOptions</span>([
+ <span class="hljs-string">'proxy'</span> =&gt; <span class="hljs-string">'http://proxy.company.com:8080'</span>
+]);
+</code></pre>
+</li>
+</ol>
+<h4 id="erreur--token-exchange-failed">Erreur : "Token exchange failed"</h4>
+<p><strong>Symptôme :</strong></p>
+<pre><code>AuthenticationException: Token exchange failed
+</code></pre><p><strong>Cause :</strong> Échec de l'échange du code d'autorisation.</p>
+<p><strong>Solutions :</strong></p>
+<ol>
+<li><p><strong>Vérifier les credentials :</strong></p>
+<pre><code class="lang-env">BJPASS_CLIENT_ID=your_client_id
+BJPASS_CLIENT_SECRET=your_client_secret
+</code></pre>
+</li>
+<li><p><strong>Vérifier l'URL de redirection :</strong></p>
+<pre><code class="lang-env">BJPASS_REDIRECT_URI=https://your-app.com/auth/callback
+</code></pre>
+</li>
+<li><p><strong>Vérifier les scopes :</strong></p>
+<pre><code class="lang-env">BJPASS_SCOPE=openid profile email
+</code></pre>
+</li>
+</ol>
+<h3 id="5-problèmes-de-session-et-cookies">5. Problèmes de session et cookies</h3>
+<h4 id="erreur--session-not-found">Erreur : "Session not found"</h4>
+<p><strong>Symptôme :</strong></p>
+<pre><code>Exception: Session not found
+</code></pre><p><strong>Cause :</strong> Problème de configuration de session.</p>
+<p><strong>Solutions :</strong></p>
+<ol>
+<li><p><strong>Vérifier la configuration de session :</strong></p>
+<pre><code class="lang-php"><span class="hljs-comment">// config/session.php</span>
+<span class="hljs-string">'driver'</span> =&gt; <span class="hljs-title function_ invoke__">env</span>(<span class="hljs-string">'SESSION_DRIVER'</span>, <span class="hljs-string">'file'</span>),
+<span class="hljs-string">'lifetime'</span> =&gt; <span class="hljs-title function_ invoke__">env</span>(<span class="hljs-string">'SESSION_LIFETIME'</span>, <span class="hljs-number">120</span>),
+<span class="hljs-string">'expire_on_close'</span> =&gt; <span class="hljs-literal">false</span>,
+</code></pre>
+</li>
+<li><p><strong>Vérifier les permissions de stockage :</strong></p>
+<pre><code class="lang-bash"><span class="hljs-built_in">chmod</span> -R 775 storage/framework/sessions
+</code></pre>
+</li>
+<li><p><strong>Vérifier la configuration du cache :</strong></p>
+<pre><code class="lang-env">CACHE_DRIVER=file
+SESSION_DRIVER=file
+</code></pre>
+</li>
+</ol>
+<h4 id="erreur--cookie-not-set">Erreur : "Cookie not set"</h4>
+<p><strong>Symptôme :</strong> Les cookies d'authentification ne sont pas définis.</p>
+<p><strong>Cause :</strong> Problème de configuration des cookies.</p>
+<p><strong>Solutions :</strong></p>
+<ol>
+<li><p><strong>Vérifier la configuration des cookies :</strong></p>
+<pre><code class="lang-env">BJPASS_COOKIE_SECURE=true
+BJPASS_COOKIE_HTTPONLY=true
+BJPASS_COOKIE_SAMESITE=lax
+</code></pre>
+</li>
+<li><p><strong>Vérifier le domaine :</strong></p>
+<pre><code class="lang-env">BJPASS_COOKIE_DOMAIN=.your-domain.com
+</code></pre>
+</li>
+</ol>
+<h3 id="6-problèmes-de-performance">6. Problèmes de performance</h3>
+<h4 id="lenteur-lors-de-la-validation-des-tokens">Lenteur lors de la validation des tokens</h4>
+<p><strong>Symptôme :</strong> Validation des tokens très lente.</p>
+<p><strong>Cause :</strong> Cache JWKS non configuré ou expiré.</p>
+<p><strong>Solutions :</strong></p>
+<ol>
+<li><p><strong>Optimiser le cache JWKS :</strong></p>
+<pre><code class="lang-env">BJPASS_JWKS_CACHE_TTL=3600
+</code></pre>
+</li>
+<li><p><strong>Utiliser Redis pour le cache :</strong></p>
+<pre><code class="lang-env">CACHE_DRIVER=redis
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+</code></pre>
+</li>
+<li><p><strong>Vérifier la configuration du cache :</strong></p>
+<pre><code class="lang-php"><span class="hljs-comment">// config/cache.php</span>
+<span class="hljs-string">'stores'</span> =&gt; [
+ <span class="hljs-string">'redis'</span> =&gt; [
+     <span class="hljs-string">'driver'</span> =&gt; <span class="hljs-string">'redis'</span>,
+     <span class="hljs-string">'connection'</span> =&gt; <span class="hljs-string">'cache'</span>,
+ ],
+],
+</code></pre>
+</li>
+</ol>
+<h3 id="7-problèmes-de-déploiement">7. Problèmes de déploiement</h3>
+<h4 id="erreur-en-production--class-not-found">Erreur en production : "Class not found"</h4>
+<p><strong>Symptôme :</strong></p>
+<pre><code>Class 'BjPass\BjPass' not found
+</code></pre><p><strong>Cause :</strong> Autoloader Composer non mis à jour.</p>
+<p><strong>Solution :</strong></p>
+<pre><code class="lang-bash">composer dump-autoload --optimize
+</code></pre>
+<h4 id="erreur--configuration-file-not-found">Erreur : "Configuration file not found"</h4>
+<p><strong>Symptôme :</strong></p>
+<pre><code>Configuration file not found: bjpass
+</code></pre><p><strong>Cause :</strong> Fichier de configuration non publié.</p>
+<p><strong>Solution :</strong></p>
+<pre><code class="lang-bash">php artisan vendor:publish --tag=bjpass-config
+</code></pre>
+<h3 id="8-problèmes-de-sécurité">8. Problèmes de sécurité</h3>
+<h4 id="erreur--csrf-token-mismatch">Erreur : "CSRF token mismatch"</h4>
+<p><strong>Symptôme :</strong></p>
+<pre><code>TokenMismatchException: CSRF token mismatch
+</code></pre><p><strong>Cause :</strong> Protection CSRF activée sur les routes d'authentification.</p>
+<p><strong>Solution :</strong></p>
+<pre><code class="lang-php"><span class="hljs-comment">// app/Http/Middleware/VerifyCsrfToken.php</span>
+<span class="hljs-keyword">protected</span> <span class="hljs-variable">$except</span> = [
+    <span class="hljs-string">'auth/*'</span>,
+    <span class="hljs-string">'api/auth/*'</span>,
+];
+</code></pre>
+<h4 id="erreur--origin-not-allowed">Erreur : "Origin not allowed"</h4>
+<p><strong>Symptôme :</strong></p>
+<pre><code>Exception: Origin not allowed
+</code></pre><p><strong>Cause :</strong> Configuration CORS trop restrictive.</p>
+<p><strong>Solution :</strong></p>
+<pre><code class="lang-php"><span class="hljs-comment">// config/cors.php</span>
+<span class="hljs-string">'allowed_origins'</span> =&gt; [
+    <span class="hljs-string">'https://your-frontend.com'</span>,
+    <span class="hljs-string">'https://your-api.com'</span>,
+],
+</code></pre>
+<h2 id="debug-et-logging">Debug et logging</h2>
+<h3 id="activer-le-mode-debug">Activer le mode debug</h3>
+<pre><code class="lang-env">BJPASS_DEBUG=true
+BJPASS_LOG_LEVEL=debug
+</code></pre>
+<h3 id="vérifier-les-logs">Vérifier les logs</h3>
+<pre><code class="lang-bash"><span class="hljs-built_in">tail</span> -f storage/logs/laravel.log | grep BjPass
+</code></pre>
+<h3 id="utiliser-tinker-pour-le-debug">Utiliser Tinker pour le debug</h3>
+<pre><code class="lang-bash">php artisan tinker
+</code></pre>
+<pre><code class="lang-php"><span class="hljs-comment">// Vérifier la configuration</span>
+<span class="hljs-title function_ invoke__">config</span>(<span class="hljs-string">'bjpass'</span>);
+
+<span class="hljs-comment">// Tester la création d'URL</span>
+<span class="hljs-title class_">BjPass</span>::<span class="hljs-title function_ invoke__">createAuthorizationUrl</span>();
+
+<span class="hljs-comment">// Vérifier le statut d'authentification</span>
+<span class="hljs-title class_">BjPass</span>::<span class="hljs-title function_ invoke__">isAuthenticated</span>();
+</code></pre>
+<h2 id="tests-de-diagnostic">Tests de diagnostic</h2>
+<h3 id="test-de-connectivité">Test de connectivité</h3>
+<pre><code class="lang-bash"><span class="hljs-comment"># Test du provider OIDC</span>
+curl -v <span class="hljs-string">"https://your-provider.com/.well-known/openid_configuration"</span>
+
+<span class="hljs-comment"># Test des endpoints</span>
+curl -v <span class="hljs-string">"https://your-provider.com/.well-known/jwks.json"</span>
+</code></pre>
+<h3 id="test-des-routes">Test des routes</h3>
+<pre><code class="lang-bash"><span class="hljs-comment"># Lister les routes BjPass</span>
+php artisan route:list | grep bjpass
+
+<span class="hljs-comment"># Tester une route spécifique</span>
+curl -v <span class="hljs-string">"https://your-app.com/auth/status"</span>
+</code></pre>
+<h3 id="test-de-session">Test de session</h3>
+<pre><code class="lang-php"><span class="hljs-comment">// Dans Tinker</span>
+<span class="hljs-title function_ invoke__">session</span>([<span class="hljs-string">'test'</span> =&gt; <span class="hljs-string">'value'</span>]);
+<span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">session</span>(<span class="hljs-string">'test'</span>);
+</code></pre>
+<h2 id="support-et-ressources">Support et ressources</h2>
+<h3 id="documentation-officielle">Documentation officielle</h3>
+<ul>
+<li><a href="installation.html">Installation</a></li>
+<li><a href="configuration.html">Configuration</a></li>
+<li><a href="api-reference.html">API Reference</a></li>
+</ul>
+<h3 id="communauté">Communauté</h3>
+<ul>
+<li><a href="https://github.com/yowedjamal/bjpass-backend-sdk/issues" target="_blank">Issues GitHub</a></li>
+<li><a href="https://github.com/yowedjamal/bjpass-backend-sdk/discussions" target="_blank">Discussions GitHub</a></li>
+</ul>
+<h3 id="logs-et-monitoring">Logs et monitoring</h3>
+<pre><code class="lang-php"><span class="hljs-comment">// Ajouter des logs personnalisés</span>
+<span class="hljs-title class_">Log</span>::<span class="hljs-title function_ invoke__">info</span>(<span class="hljs-string">'Custom auth log'</span>, [
+    <span class="hljs-string">'user_id'</span> =&gt; <span class="hljs-variable">$userId</span>,
+    <span class="hljs-string">'action'</span> =&gt; <span class="hljs-string">'login_attempt'</span>,
+    <span class="hljs-string">'timestamp'</span> =&gt; <span class="hljs-title function_ invoke__">now</span>(),
+]);
+</code></pre>
+<h2 id="prochaines-étapes">Prochaines étapes</h2>
+<ul>
+<li><a href="examples.html">Exemples</a></li>
+<li><a href="api-reference.html">API Reference</a></li>
+<li><a href="security.html">Sécurité</a></li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="examples.html" class="navigation navigation-prev " aria-label="Previous page: Exemples">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="changelog.html" class="navigation navigation-next " aria-label="Next page: Changelog">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Troubleshooting","level":"1.9","depth":1,"next":{"title":"Changelog","level":"1.10","depth":1,"path":"changelog.md","ref":"changelog.md","articles":[]},"previous":{"title":"Exemples","level":"1.8","depth":1,"path":"examples.md","ref":"examples.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Yowe Djamal","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"version":"1.0.0"},"title":"BjPass Backend SDK Documentation","language":"fr","gitbook":"*","description":"Documentation complète du SDK backend BjPass pour Laravel"},"file":{"path":"troubleshooting.md","mtime":"2025-08-14T08:33:02.729Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-08-14T08:41:02.518Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/@honkit/honkit-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

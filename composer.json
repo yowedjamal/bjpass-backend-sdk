@@ -1,5 +1,5 @@
 {
-    "version": "0.0.0",
+    "version": "0.0.1",
     "name": "yowedjamal/bjpass-backend-sdk",
     "description": "Backend SDK PHP pour BjPass - gestion OAuth2/OIDC (exchange, introspect, jwks, validation) avec intégration Laravel",
     "type": "library",

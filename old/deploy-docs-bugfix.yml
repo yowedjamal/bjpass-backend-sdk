@@ -1,0 +1,98 @@
+name: Deploy Bugfix Documentation
+
+on:
+  push:
+    branches:
+      - 'bugfix/*'
+    paths: ['docs/**']
+
+jobs:
+  deploy-bugfix:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          
+      - name: Install Honkit
+        run: npm install -g honkit
+        
+      - name: Build documentation
+        run: |
+          cd docs
+          honkit build . ../_book
+          cp redirect.html ../_book/redirect.html
+          
+      - name: Deploy to Vercel (Staging)
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: ./
+          vercel-args: '--target=staging'
+          
+      - name: Create bugfix summary
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const branch = context.ref.replace('refs/heads/', '');
+            const { data: deployments } = await github.rest.repos.listDeployments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              environment: 'staging'
+            });
+            
+            if (deployments.length > 0) {
+              const latestDeployment = deployments[0];
+              
+              console.log(`🚀 Documentation deployed for bugfix branch ${branch}`);
+              console.log(`🌐 Staging URL: ${latestDeployment.environment_url}`);
+              
+              // Create a comment on the commit if it's a PR
+              try {
+                const { data: commits } = await github.rest.repos.listCommits({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  sha: context.sha
+                });
+                
+                if (commits.length > 0) {
+                  const commit = commits[0];
+                  console.log(`📝 Commit: ${commit.commit.message}`);
+                }
+              } catch (error) {
+                console.log('Could not fetch commit details');
+              }
+            }
+          
+      - name: Notify deployment success
+        run: |
+          echo "✅ Documentation successfully deployed for bugfix branch ${{ github.ref_name }}!"
+          echo "🐛 Bugfix: ${{ github.ref_name }}"
+          echo "🌐 Staging URL: https://staging-your-docs-site.vercel.app"
+          
+      - name: Create bugfix notification
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const branch = context.ref.replace('refs/heads/', '');
+            
+            // Create an issue to track the bugfix
+            try {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: `Bugfix Documentation: ${branch}`,
+                body: `Documentation has been deployed for bugfix branch \`${branch}\`.\n\n**Status:** Deployed to staging\n**Environment:** Staging\n**Branch:** ${branch}\n\nPlease review and merge to main when ready.`,
+                labels: ['bugfix', 'documentation', 'staging']
+              });
+            } catch (error) {
+              console.log('Could not create bugfix issue');
+            }

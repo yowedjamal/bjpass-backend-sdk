@@ -1,0 +1,22 @@
+{
+  "title": "BjPass Backend SDK Documentation",
+  "description": "Documentation complète du SDK backend BjPass pour Laravel",
+  "author": "Yowe Djamal",
+  "language": "fr",
+  "structure": {
+    "readme": "README.md",
+    "summary": "SUMMARY.md"
+  },
+  "plugins": [
+    "search",
+    "copy-code-button"
+  ],
+  "pluginsConfig": {
+    "search": {
+      "maxIndexSize": 100000
+    }
+  },
+  "variables": {
+    "version": "1.0.0"
+  }
+}

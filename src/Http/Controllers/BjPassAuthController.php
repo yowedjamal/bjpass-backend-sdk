@@ -90,6 +90,7 @@ class BjPassAuthController extends Controller
             // Return success view that will communicate with frontend
             return view('bjpass::success', [
                 'user' => $result['user'],
+                'tokens' => $result['tokens'],
                 'return_url' => $returnUrl,
                 'frontend_origin' => config('bjpass.frontend_origin', '*')
             ]);

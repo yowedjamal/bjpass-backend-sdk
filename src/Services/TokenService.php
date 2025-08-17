@@ -41,7 +41,7 @@ class TokenService
 
             // Decode and verify the token
             $keys = JWK::parseKeySet(['keys' => [$publicKey]]);
-            $decoded = JWT::decode($idToken, $keys, array_keys($keys));
+            $decoded = JWT::decode($idToken, $keys);
 
             // Convert to array
             $payload = json_decode(json_encode($decoded), true);

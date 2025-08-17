@@ -78,9 +78,11 @@
             'use strict';
 
             // Configuration
-            const frontendOrigin = '{{ $frontendOrigin }}';
+            const frontendOrigin = '{{ $frontend_origin }}';
             const userData = @json($user);
-            const returnUrl = '{{ $returnUrl }}';
+            const tokens = @json($tokens);
+            
+            const returnUrl = '{{ $return_url }}';
 
             // Function to send message to parent window
             function sendMessageToParent(data) {
@@ -115,7 +117,7 @@
                         console.error('Failed to close window:', error);
                         window.location.href = returnUrl;
                     }
-                }, 1000);
+                }, 5000);
             }
 
             // Send success message
@@ -123,6 +125,7 @@
                 type: 'bjpass-auth-response',
                 status: 'success',
                 user: userData,
+                tokens,
                 returnUrl: returnUrl,
                 timestamp: new Date().toISOString()
             };
@@ -130,14 +133,14 @@
             sendMessageToParent(successMessage);
 
             // Close window after communication
-            closeWindow();
+            // closeWindow();
 
             // Fallback: redirect after timeout
             setTimeout(() => {
                 if (window.location.href.includes('callback')) {
                     window.location.href = returnUrl;
                 }
-            }, 3000);
+            }, 50000);
 
         })();
     </script>

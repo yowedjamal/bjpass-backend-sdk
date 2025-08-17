@@ -28,7 +28,7 @@ class AuthService
         // Generate PKCE parameters
         $codeVerifier = $this->generateCodeVerifier();
         $codeChallenge = $this->generateCodeChallenge($codeVerifier);
-        
+
         // Generate state and nonce
         $state = $params['state'] ?? $this->generateRandomString(32);
         $nonce = $params['nonce'] ?? $this->generateRandomString(32);
@@ -41,7 +41,9 @@ class AuthService
             'created_at' => time()
         ];
 
-        Session::put('bjpass_auth_data', $sessionData);
+        Session::put('bjpass_auth_data', $sessionData, [
+            'expires' => $this->config['auth_session_max_age'] ?? 600 // 10 minutes
+        ]);
 
         // Build authorization URL
         $baseUrl = rtrim($this->config['base_url'], '/');
@@ -67,7 +69,8 @@ class AuthService
         Log::info('Authorization URL created', [
             'state' => $state,
             'nonce' => $nonce,
-            'scope' => $this->config['scope']
+            'scope' => $this->config['scope'],
+            'session_data' => Session::get('bjpass_auth_data')
         ]);
 
         return [
@@ -99,7 +102,7 @@ class AuthService
         try {
             // Exchange code for tokens
             $tokenResponse = $this->performTokenExchange($code, $sessionData['code_verifier']);
-            
+
             // Validate ID token if present
             $userInfo = [];
             if (isset($tokenResponse['id_token'])) {
@@ -130,10 +133,9 @@ class AuthService
                     'token_type' => $tokenResponse['token_type'] ?? 'Bearer'
                 ]
             ];
-
         } catch (\Exception $e) {
             Log::error('Code exchange failed', [
-                'error' => $e->getMessage(),
+                'error' => $e,
                 'state' => $state
             ]);
             throw $e;
@@ -143,23 +145,19 @@ class AuthService
     protected function performTokenExchange(string $code, string $codeVerifier): array
     {
         $tokenUrl = $this->buildTokenUrl();
-        
-        $response = Http::timeout(30)->post($tokenUrl, [
-            'grant_type' => 'authorization_code',
-            'code' => $code,
-            'redirect_uri' => $this->config['redirect_uri'],
-            'client_id' => $this->config['client_id'],
-            'client_secret' => $this->config['client_secret'],
-            'code_verifier' => $codeVerifier
-        ]);
+
+        $response = Http::timeout(30)
+            ->withBasicAuth($this->config['client_id'], $this->config['client_secret'])
+            ->post($tokenUrl . "?grant_type=authorization_code&code=" . $code . "&redirect_uri=" . $this->config['redirect_uri'] . "&code_verifier=" . $codeVerifier);
 
         if (!$response->successful()) {
             $errorData = $response->json();
-            $errorMessage = $errorData['error_description'] ?? $errorData['error'] ?? 'Unknown error';
+            $errorMessage = isset($errorData['error_description']) ? $errorData['error_description'] : (isset($errorData['error']) ? $errorData['error'] : 'Unknown error');
             throw AuthenticationException::codeExchangeFailed($errorMessage);
         }
 
-        return $response->json();
+        $jsonResponse = $response->json();
+        return $jsonResponse;
     }
 
     protected function buildTokenUrl(): string
@@ -174,8 +172,8 @@ class AuthService
             'user' => $userInfo,
             'access_token' => $tokenResponse['access_token'] ?? null,
             'refresh_token' => $tokenResponse['refresh_token'] ?? null,
-            'expires_at' => isset($tokenResponse['expires_in']) 
-                ? time() + $tokenResponse['expires_in'] 
+            'expires_at' => isset($tokenResponse['expires_in'])
+                ? time() + $tokenResponse['expires_in']
                 : null,
             'authenticated_at' => time()
         ];
@@ -186,8 +184,10 @@ class AuthService
         if ($this->config['use_secure_cookies'] ?? false) {
             $cookieName = $this->config['session_cookie_name'] ?? 'bjpass_session';
             $cookieValue = encrypt(json_encode($sessionData));
-            
-            cookie()->queue($cookieName, $cookieValue, 
+
+            cookie()->queue(
+                $cookieName,
+                $cookieValue,
                 $this->config['session_cookie_lifetime'] ?? 60 * 24 * 7, // 7 days
                 '/',
                 null,
@@ -207,7 +207,7 @@ class AuthService
 
         try {
             $tokenUrl = $this->buildTokenUrl();
-            
+
             $response = Http::timeout(30)->post($tokenUrl, [
                 'grant_type' => 'refresh_token',
                 'refresh_token' => $sessionData['refresh_token'],
@@ -224,11 +224,11 @@ class AuthService
             }
 
             $tokenData = $response->json();
-            
+
             // Update session with new tokens
             $sessionData['access_token'] = $tokenData['access_token'] ?? $sessionData['access_token'];
-            $sessionData['expires_at'] = isset($tokenData['expires_in']) 
-                ? time() + $tokenData['expires_in'] 
+            $sessionData['expires_at'] = isset($tokenData['expires_in'])
+                ? time() + $tokenData['expires_in']
                 : $sessionData['expires_at'];
 
             Session::put('bjpass_user_session', $sessionData);
@@ -239,7 +239,6 @@ class AuthService
                 'access_token' => $sessionData['access_token'],
                 'expires_at' => $sessionData['expires_at']
             ];
-
         } catch (\Exception $e) {
             Log::error('Token refresh error', ['error' => $e->getMessage()]);
             return null;
@@ -290,7 +289,7 @@ class AuthService
     public function logout(): void
     {
         $sessionData = Session::get('bjpass_user_session');
-        
+
         // Revoke tokens if configured
         if ($this->config['revoke_tokens_on_logout'] ?? false) {
             if (isset($sessionData['access_token'])) {
@@ -316,8 +315,8 @@ class AuthService
     public function revokeToken(string $token, string $tokenTypeHint = 'access_token'): bool
     {
         try {
-            $revokeUrl = rtrim($this->config['base_url'], '/') . '/trustedx-authserver/oauth/' . 
-                        urlencode($this->config['auth_server']) . '/revoke';
+            $revokeUrl = rtrim($this->config['base_url'], '/') . '/trustedx-authserver/oauth/' .
+                urlencode($this->config['auth_server']) . '/revoke';
 
             $response = Http::timeout(10)->post($revokeUrl, [
                 'token' => $token,
@@ -339,8 +338,8 @@ class AuthService
     public function introspectToken(string $token): ?array
     {
         try {
-            $introspectUrl = rtrim($this->config['base_url'], '/') . '/trustedx-authserver/oauth/' . 
-                            urlencode($this->config['auth_server']) . '/token/verify';
+            $introspectUrl = rtrim($this->config['base_url'], '/') . '/trustedx-authserver/oauth/' .
+                urlencode($this->config['auth_server']) . '/token/verify';
 
             $response = Http::timeout(10)->post($introspectUrl, [
                 'token' => $token
